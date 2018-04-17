@@ -16,6 +16,8 @@
 # What if one agent doesn't learn at all?
 #   Poses an interesting philosophical question: If there's no one around to challenge you,
 #   can you reach your maximum potential?
+
+
 from __future__ import print_function, division
 from builtins import range, input
 # Note: you may need to update your version of future
@@ -29,11 +31,15 @@ LENGTH = 3
 
 
 class Agent:
-  def __init__(self, eps=0.1, alpha=0.5):
+  def __init__(self, eps=0.1, alpha=0.5, sym=None, initV=None):
     self.eps = eps # probability of choosing random action instead of greedy
     self.alpha = alpha # learning rate
     self.verbose = False
     self.state_history = []
+    if sym:
+        self.sym = sym
+    if initV is not None:
+        self.V = initV
   
   def setV(self, V):
     self.V = V
@@ -424,7 +430,7 @@ if __name__ == '__main__':
   p1.set_symbol(env.x)
   p2.set_symbol(env.o)
 
-  T = 10000
+  T = 1000
   for t in range(T):
     if t % 200 == 0:
       print(t)
